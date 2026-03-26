@@ -1,7 +1,7 @@
 import psycopg2
 import sys
 
-DATABASE_URL = "postgresql://postgres.hrbndnvadhqfyncbryxw:Zz9oaKB2z5jUUPpC@aws-1-ap-southeast-2.pooler.supabase.com:6543/postgres?pgbouncer=true"
+DATABASE_URL = "postgresql://postgres.hrbndnvadhqfyncbryxw:Zz9oaKB2z5jUUPpC@aws-1-ap-southeast-2.pooler.supabase.com:6543/postgres"
 
 # Note: The bracket syntax `[password]` might literally contain brackets or they were added for emphasis.
 # If the literal password is [Zz9oaKB2z5jUUPpC], we need to URL encode the brackets if psycopg2 complains.
