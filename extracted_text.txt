@@ -1,0 +1,703 @@
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+SAMRIDDHI ANVESHANA
+Chatbot Conversation Flow
+Technical & Functional Documentation
+WhatsApp  |  Telegram  |  Arattai
+Version 1.0   |   2026   |   Internal Use Only
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+1. Document Overview
+This document describes the complete chatbot conversation flow implemented for Samriddhi 
+Anveshana (SA). It covers every message a user can receive, every question the bot asks, and what 
+information is collected at each step. This is designed to work across WhatsApp, Telegram, and Arattai 
+platforms.
+1.1 Purpose
+•Define the full conversation structure from first touch to final handoff
+•Serve as a reference for developers integrating the flow into Flask + PostgreSQL
+•Act as a guide for team members managing or updating the bot
+1.2 Platforms Covered
+Platform Identifier Used Status
+WhatsApp Phone Number Active
+Telegram Chat ID Active
+Arattai User ID Active
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+2. Master Entry Message (First Touch)
+When any user first contacts SA on any platform, the bot automatically sends the following welcome 
+message. This is the entry point for all conversations.
+2.1 Welcome Message
+StepSenderMessage Content
+S-01SystemWelcome to Samriddhi Anveshana. We provide professional services in: 1) IT 
+Services & Digital Infrastructure  2) Digital Marketing  3) 24x7 Operational 
+Support  4) Compliance & Operational Consulting  5) Financial Services. Please  
+reply with the number to continue.
+U-01UserUser replies with: 1, 2, 3, 4, or 5
+2.2 Top-Level Menu Options
+ReplyService Category Description
+1IT Services & Digital 
+InfrastructureHMS, EMR, Cloud, Appointment Booking, Telemedicine
+2Digital Marketing Website, SEO, Ads, Social Media, Patient Engagement
+324x7 Operational Support Report Issue, Technical Support, Monitoring
+4Compliance & Operational 
+ConsultingCompliance Support, Audit Prep, Workflow, Analytics
+5Financial Services Payment Gateway, Finance Automation, Digital KYC, 
+Wealth Management
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+3. Category 1 — IT Services & Digital Infrastructure
+When user replies '1', the bot shows the IT Services sub-menu with 5 options. Each option opens a 
+structured data collection flow of 6 questions.
+3.1 IT Services Sub-Menu
+ReplyService What it covers
+1Hospital Management 
+System (HMS)Full HMS implementation for hospitals and clinics
+2EMR / EHR Systems Electronic medical and health record setup
+3Cloud & Cybersecurity Cloud hosting setup and security solutions
+4Appointment Booking 
+SystemOnline and offline patient booking systems
+5Telemedicine Integration Video/audio consultation setup
+3.2 HMS — Information Collected
+Triggered when user selects option 1 from the IT Services menu.
+Q
+#Question / Field Why it is collected
+1Hospital / clinic name To identify the client and personalise the proposal
+2Location For on-site support planning and regional compliance
+3Number of beds / patients 
+per dayTo size the HMS system correctly
+4Need billing & inventory 
+modules? (Yes/No)To determine scope and cost of implementation
+5Currently using any 
+software? (Yes/No)To plan data migration if existing system is present
+6Contact number For the SA team to follow up with the client
+3.3 EMR / EHR — Information Collected
+Q
+#Question / Field Why it is collected
+1Type of healthcare facility Different facilities have different EMR requirements
+2Cloud-based or local 
+system?Determines architecture and hosting approach
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+Q
+#Question / Field Why it is collected
+3Number of doctors / users For licensing and access control planning
+4Need data migration from 
+old system? (Yes/No)Migration adds complexity and cost to the project
+5Compliance requirements? 
+(NABH/NABL)Ensures the system meets certification standards
+6Contact details For follow-up by the SA team
+3.4 Cloud & Cybersecurity — Information Collected
+Q
+#Question / Field Why it is collected
+1Current system type To assess what cloud services are needed
+2Cloud hosting or security 
+only?Defines scope: full cloud vs security audit
+3Previous security issues? 
+(Yes/No)Indicates vulnerability level and urgency
+4Approximate data size For storage planning and cost estimation
+5Required security level? 
+(Basic/Advanced)Determines tools and effort required
+6Contact number For follow-up by the SA team
+3.5 Appointment Booking System — Information Collected
+Q
+#Question / Field Why it is collected
+1Hospital / clinic name To identify the client
+2Online booking needed? 
+(Yes/No)Determines if web/app development is required
+3Number of doctors For calendar and slot management configuration
+4Preferred platform? (Web / 
+App / Both)Guides development platform selection
+5Need SMS / WhatsApp 
+reminders? (Yes/No)For notification integration planning
+6Contact details For follow-up by the SA team
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+3.6 Telemedicine Integration — Information Collected
+Q
+#Question / Field Why it is collected
+1Type of consultations? 
+(Video / Audio / Both)For video/audio infrastructure planning
+2Number of doctors For server load and license estimation
+3Payment integration 
+needed? (Yes/No)Adds payment gateway scope to the project
+4Target audience (local / 
+global)Determines latency, language, and compliance needs
+5Existing system? (Yes/No) For integration vs fresh build decision
+6Contact number For follow-up by the SA team
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+4. Category 2 — Digital Marketing
+When user replies '2', the bot presents 5 digital marketing service options. Each leads to a 6-question 
+data collection flow.
+4.1 Digital Marketing Sub-Menu
+ReplyService What it covers
+1Website Development Building or redesigning business/hospital websites
+2SEO Services Improving search engine rankings and visibility
+3Google & Meta Ads Paid advertising campaigns on Google and Facebook
+4Social Media Management Content creation and platform management
+5Patient Engagement 
+CampaignsWhatsApp/SMS/Email campaigns targeting patients
+4.2 Website Development — Information Collected
+Q
+#Question / Field Why it is collected
+1Business / hospital name Client identification
+2Already have a website? 
+(Yes/No)Determines redesign vs new build
+3Type of website? (Basic / 
+Advanced / E-commerce)Scoping and pricing
+4Required pages (Home, 
+About, Services, etc.)Content and design planning
+5Booking / payment 
+integration needed? 
+(Yes/No)Adds technical complexity and cost
+6Contact details For follow-up by the SA team
+4.3 SEO Services — Information Collected
+Q
+#Question / Field Why it is collected
+1Website URL For audit and current ranking analysis
+2Target location For local vs national SEO strategy
+3Target keywords (if any) To define the focus of SEO campaign
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+Q
+#Question / Field Why it is collected
+4Current traffic status (Low / 
+Medium / High)To assess starting point and set realistic goals
+5Competitors (if known) For competitive analysis
+6Contact number For follow-up by the SA team
+4.4 Google & Meta Ads — Information Collected
+Q
+#Question / Field Why it is collected
+1Business type To design relevant ad creatives and targeting
+2Monthly ad budget To set realistic campaign expectations
+3Target audience / location For precise ad targeting setup
+4Goal? (Leads / Traffic / 
+Sales)To select correct campaign objective
+5Previous ads experience? 
+(Yes/No)To decide whether basic or advanced setup is needed
+6Contact details For follow-up by the SA team
+4.5 Social Media Management — Information Collected
+Q
+#Question / Field Why it is collected
+1Platforms (Instagram / 
+Facebook / etc.)Each platform needs separate content strategy
+2Current followers To set growth targets and benchmarks
+3Posting frequency needed For content calendar planning
+4Content type? (Reels / Posts  
+/ Both)For production planning and tools
+5Branding requirements To maintain visual consistency
+6Contact number For follow-up by the SA team
+4.6 Patient Engagement Campaigns — Information Collected
+Q
+#Question / Field Why it is collected
+1Target audience type To design relevant campaign messaging
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+Q
+#Question / Field Why it is collected
+2Campaign goal To measure success metrics
+3Preferred channel 
+(WhatsApp / SMS / Email)To determine technical integration needed
+4Campaign duration For scheduling and resource planning
+5Need automation? (Yes/No) Determines if bot/automation setup is required
+6Contact details For follow-up by the SA team
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+5. Category 3 — 24x7 Operational Support
+When user replies '3', the bot presents 3 support options. This category handles live issues and service  
+requests.
+5.1 Support Sub-Menu
+ReplyOption Purpose
+1Report an Issue For clients experiencing problems with existing SA systems
+2Request Technical Support For planned or ad-hoc support assistance
+3Monitoring Services For setting up continuous system monitoring
+5.2 Report an Issue — Information Collected
+Q
+#Question / Field Why it is collected
+1Issue type To route the ticket to the correct department
+2System affected To identify which SA product/service is impacted
+3When did it occur? For timeline tracking and root cause analysis
+4Urgency level? (Low / 
+Medium / High)To prioritise response SLA
+5Screenshot (if possible) Visual evidence speeds up diagnosis
+6Contact number For the support team to call back immediately
+5.3 Technical Support Request — Information Collected
+Q
+#Question / Field Why it is collected
+1Type of support needed To assign the right technical resource
+2System details For the technician to prepare before the session
+3Preferred time For scheduling the support session
+4Issue description To document the problem clearly
+5Priority level For resource allocation
+6Contact details For confirmation and follow-up
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+5.4 Monitoring Services — Information Collected
+Q
+#Question / Field Why it is collected
+1What system needs 
+monitoring?To set up the correct monitoring agent
+2Current setup For compatibility and integration planning
+3Alert preferences How and when the client wants to be notified
+4Reporting frequency For dashboard and report schedule setup
+5Number of systems For pricing and resource estimation
+6Contact number For the SA team to set up onboarding
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+6. Category 4 — Compliance & Operational Consulting
+When user replies '4', the bot shows 4 consulting service options. This category handles certification, 
+audit, and workflow improvement requests.
+6.1 Consulting Sub-Menu
+ReplyService Purpose
+1Compliance Support NABH/NABL certification guidance and documentation
+2Audit Preparation Preparing clients for upcoming audits
+3Workflow Optimization Streamlining internal hospital/clinic processes
+4Performance Analytics Tracking KPIs with dashboards and reports
+6.2 Compliance Support — Information Collected
+Q
+#Question / Field Why it is collected
+1Hospital type Different types have different compliance requirements
+2Required certification (NABH  
+/ NABL)To determine applicable standards
+3Current compliance status To identify gaps and plan the roadmap
+4Documentation available? 
+(Yes/No)Determines effort needed to build documentation
+5Timeline For planning milestones and resource allocation
+6Contact details For follow-up by the SA consulting team
+6.3 Audit Preparation — Information Collected
+Q
+#Question / Field Why it is collected
+1Audit type To align preparation with specific audit requirements
+2Scheduled date To create a backward-planned preparation timeline
+3Current readiness level To assess how much work is needed
+4Required documentation To identify documentation gaps
+5Need training? (Yes/No) To plan staff readiness sessions
+6Contact number For follow-up scheduling
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+6.4 Workflow Optimization — Information Collected
+Q
+#Question / Field Why it is collected
+1Department to optimize To focus the analysis on the right area
+2Current challenges To understand pain points and bottlenecks
+3Expected improvements To set goals and success metrics
+4Number of staff For process mapping and change management scope
+5Tools currently used For integration and compatibility planning
+6Contact details For follow-up by the SA team
+6.5 Performance Analytics — Information Collected
+Q
+#Question / Field Why it is collected
+1What metrics do you track? To understand current reporting and identify gaps
+2Need dashboard? (Yes/No) To determine if a visual BI tool is required
+3Data source For integration with the analytics system
+4Reporting frequency For scheduling automated reports
+5Goals To align analytics output with business objectives
+6Contact number For follow-up by the SA analytics team
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+7. Category 5 — Financial Services
+When user replies '5', the bot presents 4 financial service options covering payment solutions, 
+automation tools, KYC systems, and wealth management advisory.
+7.1 Financial Services Sub-Menu
+ReplyService What it covers
+1Payment Gateway 
+IntegrationSetting up online payment solutions for businesses
+2Finance Automation Tools Automating invoicing, reconciliation and financial workflows
+3Digital KYC Systems Electronic Know Your Customer verification setup
+4Wealth Management 
+AdvisoryInvestment planning, mutual funds, tax saving and financial 
+planning
+7.2 Payment Gateway Integration — Information Collected
+Q
+#Question / Field Why it is collected
+1Business / company name To identify the client and personalise the proposal
+2Type of business? (Retail / 
+Healthcare / E-commerce / 
+Other)To recommend the right payment gateway provider
+3Expected monthly 
+transaction volume?For gateway tier selection and pricing
+4Need UPI / card / wallet 
+support? (specify)To configure the required payment modes
+5Existing website or app? 
+(Yes/No)To plan integration approach
+6Contact details For follow-up by the SA financial team
+7.3 Finance Automation Tools — Information Collected
+Q
+#Question / Field Why it is collected
+1Business type and size To select the appropriate automation tool
+2Which processes to 
+automate? (Invoicing / 
+Payroll / Reconciliation)To scope the automation modules required
+3Current accounting For integration compatibility planning
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+Q
+#Question / Field Why it is collected
+software? (Tally / Zoho / 
+Other / None)
+4Number of transactions per 
+month (approx.)For system sizing and performance planning
+5Need staff training? (Yes/No) To plan onboarding and training sessions
+6Contact number For follow-up by the SA team
+7.4 Digital KYC Systems — Information Collected
+Q
+#Question / Field Why it is collected
+1Organisation type? (NBFC / 
+Bank / Fintech / Healthcare)Different sectors have different KYC compliance rules
+2Expected number of KYC 
+verifications per monthFor system capacity and pricing
+3Document types needed? 
+(Aadhaar / PAN / Passport / 
+Other)To configure the document verification modules
+4Need video KYC? (Yes/No) Video KYC requires additional infrastructure
+5Existing system to integrate 
+with? (Yes/No)For API integration planning
+6Contact details For follow-up by the SA team
+7.5 Wealth Management Advisory — Information Collected
+Q
+#Question / Field Why it is collected
+1Individual or corporate 
+client?To assign the right advisor and product set
+2Investment goal? (Wealth 
+growth / Tax saving / 
+Retirement / Other)To recommend suitable financial instruments
+3Risk appetite? (Low / 
+Medium / High)For portfolio construction and product selection
+4Approximate investment 
+amount or monthly SIP 
+budgetTo filter relevant mutual funds and plans
+5Existing investments? To review current portfolio before advising
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+Q
+#Question / Field Why it is collected
+(Yes/No)
+6Contact number For the SA advisor to schedule a consultation
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+8. Final Auto-Response (All Flows)
+Every conversation — regardless of which service category or sub-option the user chose — ends with 
+the same confirmation message once all 6 questions are answered.
+StepSenderMessage Content
+S-
+FINA
+LSystemThank you for contacting Samriddhi Anveshana. Our team will review your 
+request and get in touch shortly. For immediate assistance, please call: 
+XXXXXXXX
+This message serves three purposes:
+•Confirms the user's information was received successfully
+•Sets expectation that the SA team will follow up
+•Provides a direct call number for urgent needs
+9. Data Stored in PostgreSQL
+Every conversation interaction is saved to the database. Below is what gets stored and why.
+9.1 Users Table
+Column Type Purpose
+id Auto number Unique identifier for each user
+phone Text Phone number (WhatsApp), Chat ID (Telegram), User ID 
+(Arattai)
+platform Text Which platform the user came from
+created_at Timestamp When the user first contacted SA
+9.2 Messages Table
+Column Type Purpose
+id Auto number Unique message record ID
+user_id Reference Links message to the user who sent it
+message Text The exact text the user typed
+response Text The exact reply the bot sent back
+platform Text WhatsApp / Telegram / Arattai
+created_at Timestamp Time the message was sent
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+10. Summary — Complete Flow at a Glance
+CategorySub-Services Questions 
+AskedData Stored
+IT ServicesHMS, EMR, Cloud, 
+Booking, 
+Telemedicine6 per serviceName, location, system details, contact
+Digital 
+MarketingWebsite, SEO, Ads, 
+Social Media, 
+Campaigns6 per serviceBusiness info, goals, budget, contact
+Operational 
+SupportIssue Report, Tech 
+Support, Monitoring6 per serviceSystem, urgency, timeline, contact
+Compliance & 
+ConsultingCompliance, Audit, 
+Workflow, Analytics6 per serviceFacility type, status, timeline, contact
+Financial 
+ServicesPayment Gateway, 
+Finance Automation, 
+Digital KYC, Wealth 
+Management6 per serviceBusiness type, goals, volume, contact
+Total services: 21 sub-services across 5 categories, each with 6 questions = up to 126 data points 
+collectible per full journey.
+11. Key Implementation Notes
+•All conversations start from a single entry message — same across WhatsApp, Telegram, and 
+Arattai
+•User replies with a number (1-5) to navigate — no free text needed at menu steps
+•Each service collects exactly 6 data points from the user before ending
+•All conversations end with the same final thank you message regardless of path
+•Every message and reply is saved in PostgreSQL for analytics and follow-up
+•The SA operations team receives the lead data and follows up manually or through CRM
+•Contact number is always the last question collected — ensuring maximum engagement before 
+asking for personal info
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+12. Full Conversation Flow Tree
+This section shows the complete branching structure of the chatbot — from the very first message to 
+every possible end point. Read top to bottom. Each indent level represents one step deeper into the 
+conversation.
+Legend
+Symbol / 
+ColorMeaning Example
+ENTRYFirst message sent by the bot to every 
+new userWelcome to Samriddhi Anveshana...
+MENUBot sends a numbered list — user replies 
+with a numberReply 1 for IT Services, 2 for Digital 
+Marketing...
+Q1-Q6Bot asks 6 questions one by one — user 
+types their answerWhat is your hospital name? / How many 
+beds?...
+ENDBot sends final thank-you message and 
+closes the flowThank you! Our team will get in touch 
+shortly.
+START: User first messages SA on any platform
+Bot sends welcome message automatically
+User replies: 1  →  IT Services & Digital Infrastructure
+Bot shows IT Services sub-menu (5 options)
+User replies: 1  →  Hospital Management System (HMS)
+Bot begins 6-question data collection
+Q1: What is your hospital / clinic name?
+Q2: What is your location?
+Q3: Number of beds / patients per day?
+Q4: Do you need billing & inventory modules? (Yes/No)
+Q5: Do you currently use any software? (Yes/No)
+Q6: Contact number?
+END: Thank you! Our team will contact you shortly.
+User replies: 2  →  EMR / EHR Systems
+Bot begins 6-question data collection
+Q1: Type of healthcare facility?
+Q2: Cloud-based or local system?
+Q3: Number of doctors / users?
+Q4: Need data migration from old system? (Yes/No)
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+Q5: Any compliance requirements? (NABH / NABL)
+Q6: Contact details?
+END: Thank you! Our team will contact you shortly.
+User replies: 3  →  Cloud & Cybersecurity
+Bot begins 6-question data collection
+Q1: What type of system do you currently use?
+Q2: Cloud hosting or security only?
+Q3: Any previous security issues? (Yes/No)
+Q4: Approximate data size?
+Q5: Required security level? (Basic / Advanced)
+Q6: Contact number?
+END: Thank you! Our team will contact you shortly.
+User replies: 4  →  Appointment Booking System
+Bot begins 6-question data collection
+Q1: Hospital / clinic name?
+Q2: Do you want online booking? (Yes/No)
+Q3: Number of doctors?
+Q4: Preferred platform? (Web / App / Both)
+Q5: Need SMS / WhatsApp reminders? (Yes/No)
+Q6: Contact details?
+END: Thank you! Our team will contact you shortly.
+User replies: 5  →  Telemedicine Integration
+Bot begins 6-question data collection
+Q1: Type of consultations? (Video / Audio / Both)
+Q2: Number of doctors?
+Q3: Need payment integration? (Yes/No)
+Q4: Target audience? (Local / Global)
+Q5: Existing system? (Yes/No)
+Q6: Contact number?
+END: Thank you! Our team will contact you shortly.
+User replies: 2  →  Digital Marketing
+Bot shows Digital Marketing sub-menu (5 options)
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+User replies: 1  →  Website Development
+Bot begins 6-question data collection
+Q1: Business / hospital name?
+Q2: Do you already have a website? (Yes/No)
+Q3: Type of website? (Basic / Advanced / E-commerce)
+Q4: Required pages? (Home, About, Services, etc.)
+Q5: Need booking / payment integration? (Yes/No)
+Q6: Contact details?
+END: Thank you! Our team will contact you shortly.
+User replies: 2  →  SEO Services
+Bot begins 6-question data collection
+Q1: Website URL?
+Q2: Target location?
+Q3: Target keywords (if any)?
+Q4: Current traffic status? (Low / Medium / High)
+Q5: Competitors (if known)?
+Q6: Contact number?
+END: Thank you! Our team will contact you shortly.
+User replies: 3  →  Google & Meta Ads
+Bot begins 6-question data collection
+Q1: Business type?
+Q2: Monthly ad budget?
+Q3: Target audience / location?
+Q4: Goal? (Leads / Traffic / Sales)
+Q5: Previous ads experience? (Yes/No)
+Q6: Contact details?
+END: Thank you! Our team will contact you shortly.
+User replies: 4  →  Social Media Management
+Bot begins 6-question data collection
+Q1: Platforms? (Instagram / Facebook / etc.)
+Q2: Current followers?
+Q3: Posting frequency needed?
+Q4: Content type? (Reels / Posts / Both)
+Q5: Branding requirements?
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+Q6: Contact number?
+END: Thank you! Our team will contact you shortly.
+User replies: 5  →  Patient Engagement Campaigns
+Bot begins 6-question data collection
+Q1: Target audience type?
+Q2: Campaign goal?
+Q3: Preferred channel? (WhatsApp / SMS / Email)
+Q4: Campaign duration?
+Q5: Need automation? (Yes/No)
+Q6: Contact details?
+END: Thank you! Our team will contact you shortly.
+User replies: 3  →  24x7 Operational Support
+Bot shows Support sub-menu (3 options)
+User replies: 1  →  Report an Issue
+Bot begins 6-question data collection
+Q1: Issue type?
+Q2: System affected?
+Q3: When did it occur?
+Q4: Urgency level? (Low / Medium / High)
+Q5: Screenshot (if possible)?
+Q6: Contact number?
+END: Thank you! Our team will contact you shortly.
+User replies: 2  →  Request Technical Support
+Bot begins 6-question data collection
+Q1: Type of support needed?
+Q2: System details?
+Q3: Preferred time?
+Q4: Issue description?
+Q5: Priority level?
+Q6: Contact details?
+END: Thank you! Our team will contact you shortly.
+User replies: 3  →  Monitoring Services
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+Bot begins 6-question data collection
+Q1: What system needs monitoring?
+Q2: Current setup?
+Q3: Alert preferences?
+Q4: Reporting frequency?
+Q5: Number of systems?
+Q6: Contact number?
+END: Thank you! Our team will contact you shortly.
+User replies: 4  →  Compliance & Operational Consulting
+Bot shows Consulting sub-menu (4 options)
+User replies: 1  →  Compliance Support
+Bot begins 6-question data collection
+Q1: Hospital type?
+Q2: Required certification? (NABH / NABL)
+Q3: Current compliance status?
+Q4: Documentation available? (Yes/No)
+Q5: Timeline?
+Q6: Contact details?
+END: Thank you! Our team will contact you shortly.
+User replies: 2  →  Audit Preparation
+Bot begins 6-question data collection
+Q1: Audit type?
+Q2: Scheduled date?
+Q3: Current readiness level?
+Q4: Required documentation?
+Q5: Need training? (Yes/No)
+Q6: Contact number?
+END: Thank you! Our team will contact you shortly.
+User replies: 3  →  Workflow Optimization
+Bot begins 6-question data collection
+Q1: Department to optimize?
+Q2: Current challenges?
+Q3: Expected improvements?
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+Q4: Number of staff?
+Q5: Tools currently used?
+Q6: Contact details?
+END: Thank you! Our team will contact you shortly.
+User replies: 4  →  Performance Analytics
+Bot begins 6-question data collection
+Q1: What metrics do you track?
+Q2: Need dashboard? (Yes/No)
+Q3: Data source?
+Q4: Reporting frequency?
+Q5: Goals?
+Q6: Contact number?
+END: Thank you! Our team will contact you shortly.
+User replies: 5  →  Financial Services
+Bot shows Financial Services sub-menu (4 options)
+User replies: 1  →  Payment Gateway Integration
+Bot begins 6-question data collection
+Q1: Business / company name?
+Q2: Type of business? (Retail / Healthcare / E-commerce / Other)
+Q3: Expected monthly transaction volume?
+Q4: Need UPI / card / wallet support? (specify)
+Q5: Existing website or app? (Yes/No)
+Q6: Contact details?
+END: Thank you! Our team will contact you shortly.
+User replies: 2  →  Finance Automation Tools
+Bot begins 6-question data collection
+Q1: Business type and size?
+Q2: Processes to automate? (Invoicing / Payroll / Reconciliation)
+Q3: Current accounting software? (Tally / Zoho / Other / None)
+Q4: Number of transactions per month (approx.)?
+Q5: Need staff training? (Yes/No)
+Q6: Contact number?
+END: Thank you! Our team will contact you shortly.
+SA Chatbot Documentation v1.0  |  2026 Page 
+=== PAGE BREAK ===
+Samriddhi Anveshana    |   Chatbot Conversation Flow Documentation    |   Confidential
+User replies: 3  →  Digital KYC Systems
+Bot begins 6-question data collection
+Q1: Organisation type? (NBFC / Bank / Fintech / Healthcare)
+Q2: Expected KYC verifications per month?
+Q3: Document types needed? (Aadhaar / PAN / Passport / Other)
+Q4: Need video KYC? (Yes/No)
+Q5: Existing system to integrate with? (Yes/No)
+Q6: Contact details?
+END: Thank you! Our team will contact you shortly.
+User replies: 4  →  Wealth Management Advisory
+Bot begins 6-question data collection
+Q1: Individual or corporate client?
+Q2: Investment goal? (Wealth growth / Tax saving / Retirement / Other)
+Q3: Risk appetite? (Low / Medium / High)
+Q4: Approximate investment amount or monthly SIP budget?
+Q5: Existing investments? (Yes/No)
+Q6: Contact number?
+END: Thank you! Our team will contact you shortly.
+End of Document  |  Samriddhi Anveshana Chatbot Flow Documentation  |  v1.0
+SA Chatbot Documentation v1.0  |  2026 Page 
