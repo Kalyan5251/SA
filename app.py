@@ -1,6 +1,7 @@
 import os
 import requests
 import logging
+import psycopg2
 from flask import Flask, request, jsonify
 
 # Configure logging
@@ -16,6 +17,10 @@ app = Flask(__name__)
 # Telegram Bot Token
 TELEGRAM_BOT_TOKEN = "8609250788:AAE6sXAdXmDBqOJjULaJOKidbWTIRePpTAg"
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
+
+# Database URL from environment (fallback to hardcoded if not found)
+DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:Zz9oaKB2z5jUUPpC@db.hrbndnvadhqfyncbryxw.supabase.co:5432/postgres")
+
 
 # Import chatbot engine
 try:
@@ -71,6 +76,36 @@ def webhook():
         if bot_response:
             send_message(chat_id, bot_response)
             
+            # Database insert logic
+            try:
+                conn = psycopg2.connect(DATABASE_URL)
+                cur = conn.cursor()
+                
+                # Insert user if they don't exist to prevent foreign key errors
+                cur.execute("""
+                    INSERT INTO users (phone, platform) 
+                    VALUES (%s, %s)
+                    ON CONFLICT (phone) DO NOTHING;
+                """, (str(chat_id), "Telegram"))
+                
+                # Insert the message
+                cur.execute("""
+                    INSERT INTO messages (phone, message, response, platform) 
+                    VALUES (%s, %s, %s, %s);
+                """, (str(chat_id), text, bot_response, "Telegram"))
+                
+                conn.commit()
+                print("Data saved")
+            except psycopg2.Error as db_err:
+                print(f"Database error: {db_err}")
+                if 'conn' in locals() and conn:
+                    conn.rollback()
+            finally:
+                if 'cur' in locals() and cur:
+                    cur.close()
+                if 'conn' in locals() and conn:
+                    conn.close()
+
     except Exception as e:
         logger.error(f"Error processing message for chat_id {chat_id}: {e}", exc_info=True)
 
