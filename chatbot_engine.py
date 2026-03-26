@@ -4,7 +4,7 @@ import json
 import os
 import sys
 
-DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:Zz9oaKB2z5jUUPpC@db.hrbndnvadhqfyncbryxw.supabase.co:5432/postgres")
+DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres.hrbndnvadhqfyncbryxw:Zz9oaKB2z5jUUPpC@aws-1-ap-southeast-2.pooler.supabase.com:6543/postgres?pgbouncer=true")
 
 def log_interaction(user_id, user_message, bot_response, platform="Telegram"):
     try:

@@ -19,7 +19,7 @@ TELEGRAM_BOT_TOKEN = "8609250788:AAE6sXAdXmDBqOJjULaJOKidbWTIRePpTAg"
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
 
 # Database URL from environment (fallback to hardcoded if not found)
-DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:Zz9oaKB2z5jUUPpC@db.hrbndnvadhqfyncbryxw.supabase.co:5432/postgres")
+DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres.hrbndnvadhqfyncbryxw:Zz9oaKB2z5jUUPpC@aws-1-ap-southeast-2.pooler.supabase.com:6543/postgres?pgbouncer=true")
 
 
 # Import chatbot engine
