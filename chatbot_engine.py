@@ -1,5 +1,6 @@
 import enum
 import psycopg2
+import json
 
 DATABASE_URL = "postgresql://postgres:Zz9oaKB2z5jUUPpC@db.hrbndnvadhqfyncbryxw.supabase.co:5432/postgres"
 
@@ -24,6 +25,22 @@ def log_interaction(user_id, user_message, bot_response, platform="Telegram"):
         conn.close()
     except Exception as e:
         print(f"Database error: {e}")
+
+def save_lead(user_id, main_category, sub_category, answers):
+    try:
+        conn = psycopg2.connect(DATABASE_URL)
+        cur = conn.cursor()
+        
+        cur.execute("""
+            INSERT INTO leads (user_id, main_category, sub_category, answers) 
+            VALUES (%s, %s, %s, %s);
+        """, (str(user_id), main_category, sub_category, json.dumps(answers)))
+        
+        conn.commit()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        print(f"Database error while saving lead: {e}")
 
 
 WELCOME_MESSAGE = """Welcome to Samriddhi Anveshana. We provide professional services in:
@@ -371,7 +388,12 @@ class SamriddhiChatbot:
                 # Flow completed
                 session.state = State.COMPLETED
                 
-                # Using global logging function to log to PostgreSQL
+                # Save the lead details to the database before resetting
+                main_cat_name = MAIN_MENU[session.main_category]
+                sub_cat_name = SUB_MENUS[session.main_category][session.sub_category]
+                
+                save_lead(session.user_id, main_cat_name, sub_cat_name, session.answers)
+                
                 session.reset()
                 return FINAL_MESSAGE
 

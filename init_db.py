@@ -38,18 +38,15 @@ def create_tables():
         );
         """)
         
-        # Create Leads table
+        # Create Leads table with a generic schema
+        cur.execute("DROP TABLE IF EXISTS leads;")
         cur.execute("""
         CREATE TABLE IF NOT EXISTS leads (
             id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
             user_id TEXT,
-            service TEXT,
-            name TEXT,
-            location TEXT,
-            patients TEXT,
-            billing TEXT,
-            existing_system TEXT,
-            phone TEXT,
+            main_category TEXT,
+            sub_category TEXT,
+            answers JSONB,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
         """)
