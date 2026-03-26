@@ -1,8 +1,10 @@
 import enum
 import psycopg2
 import json
+import os
+import sys
 
-DATABASE_URL = "postgresql://postgres:Zz9oaKB2z5jUUPpC@db.hrbndnvadhqfyncbryxw.supabase.co:5432/postgres"
+DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:Zz9oaKB2z5jUUPpC@db.hrbndnvadhqfyncbryxw.supabase.co:5432/postgres")
 
 def log_interaction(user_id, user_message, bot_response, platform="Telegram"):
     try:
@@ -24,7 +26,7 @@ def log_interaction(user_id, user_message, bot_response, platform="Telegram"):
         cur.close()
         conn.close()
     except Exception as e:
-        print(f"Database error: {e}")
+        print(f"Database error in log_interaction: {e}", file=sys.stderr, flush=True)
 
 def save_lead(user_id, main_category, sub_category, answers):
     try:
@@ -40,7 +42,7 @@ def save_lead(user_id, main_category, sub_category, answers):
         cur.close()
         conn.close()
     except Exception as e:
-        print(f"Database error while saving lead: {e}")
+        print(f"Database error while saving lead: {e}", file=sys.stderr, flush=True)
 
 
 WELCOME_MESSAGE = """Welcome to Samriddhi Anveshana. We provide professional services in:
