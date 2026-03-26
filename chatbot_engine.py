@@ -321,7 +321,8 @@ class SamriddhiChatbot:
 
     def process_message(self, user_id, message):
         bot_response = self._generate_response(user_id, message)
-        log_interaction(user_id, message, bot_response)
+        # log_interaction is now handled entirely inside app.py webhook logic to avoid duplicate saves
+        # log_interaction(user_id, message, bot_response)
         return bot_response
 
     def _generate_response(self, user_id, message):
