@@ -161,14 +161,14 @@ def verify_webhook():
     token = request.args.get("hub.verify_token")
     challenge = request.args.get("hub.challenge")
 
-    if mode and token:
-        if mode == "subscribe" and token == WHATSAPP_VERIFY_TOKEN:
-            logger.info("WhatsApp webhook verified successfully!")
-            return challenge, 200
-        else:
-            return "Verification failed", 403
-            
-    return "Webhook GET endpoint is active", 200
+    logger.info(f"Webhook Verification - Mode: {mode}, Token: {token}, Expected Token: {WHATSAPP_VERIFY_TOKEN}")
+
+    if mode == "subscribe" and token == WHATSAPP_VERIFY_TOKEN:
+        logger.info("WhatsApp webhook verified successfully!")
+        return challenge, 200
+        
+    logger.warning("WhatsApp webhook verification failed.")
+    return "Verification failed", 403
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
