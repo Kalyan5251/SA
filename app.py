@@ -154,22 +154,25 @@ def process_whatsapp_update(update):
     
     return jsonify({"status": "ok"}), 200
 
-@app.route('/webhook', methods=['GET', 'POST'])
-def webhook():
-    """Endpoint to receive updates from Telegram and WhatsApp."""
-    if request.method == 'GET':
-        # WhatsApp Webhook Verification
-        mode = request.args.get("hub.mode")
-        token = request.args.get("hub.verify_token")
-        challenge = request.args.get("hub.challenge")
+@app.route('/webhook', methods=['GET'])
+def verify_webhook():
+    """WhatsApp Webhook Verification"""
+    mode = request.args.get("hub.mode")
+    token = request.args.get("hub.verify_token")
+    challenge = request.args.get("hub.challenge")
 
+    if mode and token:
         if mode == "subscribe" and token == WHATSAPP_VERIFY_TOKEN:
             logger.info("WhatsApp webhook verified successfully!")
             return challenge, 200
-        elif mode or token:
+        else:
             return "Verification failed", 403
-        return "Webhook is active", 200
+            
+    return "Webhook GET endpoint is active", 200
 
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    """Endpoint to receive updates from Telegram and WhatsApp."""
     if not request.is_json:
         return jsonify({"status": "error", "message": "Request must be JSON"}), 400
 
