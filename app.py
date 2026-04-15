@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 # Telegram Bot Token
-TELEGRAM_BOT_TOKEN = "8609250788:AAE6sXAdXmDBqOJjULaJOKidbWTIRePpTAg"
+TELEGRAM_BOT_TOKEN = "7993368623:AAHaaDgXwuGZdgmknmEWzUjmUuzQu9HzeUk"
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
 
 # WhatsApp API Configuration
