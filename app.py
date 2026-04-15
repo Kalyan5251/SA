@@ -2,6 +2,7 @@ import os
 import requests
 import logging
 import psycopg2
+import threading
 from flask import Flask, request, jsonify
 
 # Configure logging
@@ -123,7 +124,6 @@ def process_telegram_update(update):
         bot_response = process_message(str(chat_id), text)
         if bot_response:
             send_telegram_message(chat_id, bot_response)
-            import threading
             threading.Thread(target=save_to_db, args=(chat_id, text, bot_response, "Telegram")).start()
     except Exception as e:
         logger.error(f"Error processing Telegram message for {chat_id}: {e}", exc_info=True)
@@ -147,7 +147,6 @@ def process_whatsapp_update(update):
                             
                             if bot_response:
                                 send_whatsapp_message(phone_number_id, sender_phone, bot_response)
-                                import threading
                                 threading.Thread(target=save_to_db, args=(sender_phone, text, bot_response, "WhatsApp")).start()
     except Exception as e:
         logger.error(f"Error processing WhatsApp message: {e}", exc_info=True)
