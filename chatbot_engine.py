@@ -244,12 +244,12 @@ class HospitalBot:
             return WELCOME_MESSAGE
 
         if session.state == State.MAIN_MENU:
-            if message in MAIN_MENU:
-                session.category = message
+            if msg in MAIN_MENU:
+                session.category = msg
                 session.state = State.QUESTIONNAIRE
                 session.question_index = 0
                 session.answers = []
-                return QUESTIONS[message][0]
+                return QUESTIONS[msg][0]
             return WELCOME_MESSAGE
 
         elif session.state == State.QUESTIONNAIRE:

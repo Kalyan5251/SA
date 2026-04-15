@@ -76,7 +76,7 @@ def send_whatsapp_message(phone_number_id, to, text):
 
 def save_to_db(chat_id, text, bot_response, platform):
     try:
-        conn = psycopg2.connect(DATABASE_URL)
+        conn = psycopg2.connect(DATABASE_URL, connect_timeout=5, sslmode='require')
         cur = conn.cursor()
         
         # Insert user if they don't exist
@@ -123,7 +123,8 @@ def process_telegram_update(update):
         bot_response = process_message(str(chat_id), text)
         if bot_response:
             send_telegram_message(chat_id, bot_response)
-            save_to_db(chat_id, text, bot_response, "Telegram")
+            import threading
+            threading.Thread(target=save_to_db, args=(chat_id, text, bot_response, "Telegram")).start()
     except Exception as e:
         logger.error(f"Error processing Telegram message for {chat_id}: {e}", exc_info=True)
 
@@ -146,7 +147,8 @@ def process_whatsapp_update(update):
                             
                             if bot_response:
                                 send_whatsapp_message(phone_number_id, sender_phone, bot_response)
-                                save_to_db(sender_phone, text, bot_response, "WhatsApp")
+                                import threading
+                                threading.Thread(target=save_to_db, args=(sender_phone, text, bot_response, "WhatsApp")).start()
     except Exception as e:
         logger.error(f"Error processing WhatsApp message: {e}", exc_info=True)
     
