@@ -30,12 +30,10 @@ DATABASE_URL = raw_db_url.replace("?pgbouncer=true", "").replace("\n", "").strip
 
 
 # Import chatbot engine
-try:
-    from chatbot_engine import process_message
-except ImportError:
-    from chatbot_engine import SamriddhiChatbot
-    bot = SamriddhiChatbot()
-    process_message = bot.process_message
+from chatbot_engine import HospitalBot
+
+bot = HospitalBot()
+process_message = bot.process_message
 
 WHATSAPP_TOKEN = os.environ.get("WHATSAPP_TOKEN", WHATSAPP_ACCESS_TOKEN)
 

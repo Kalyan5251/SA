@@ -1,8 +1,8 @@
 import sys
-from chatbot_engine import SamriddhiChatbot
+from chatbot_engine import HospitalBot
 
 def main():
-    bot = SamriddhiChatbot()
+    bot = HospitalBot()
     user_id = "demo_user"
     
     print("\n--- Samriddhi Anveshana Chatbot Interactive Mode ---")
