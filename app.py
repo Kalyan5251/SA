@@ -156,19 +156,21 @@ def process_whatsapp_update(update):
 
 @app.route('/webhook', methods=['GET'])
 def verify_webhook():
-    """WhatsApp Webhook Verification"""
+    """Meta WhatsApp Webhook Verification (only triggers when hub params are present)."""
     mode = request.args.get("hub.mode")
     token = request.args.get("hub.verify_token")
     challenge = request.args.get("hub.challenge")
 
-    logger.info(f"Webhook Verification - Mode: {mode}, Token: {token}, Expected Token: {WHATSAPP_VERIFY_TOKEN}")
+    if mode and token:
+        logger.info(f"Webhook Verification - Mode: {mode}, Token: {token}, Expected Token: {WHATSAPP_VERIFY_TOKEN}")
+        if mode == "subscribe" and token == WHATSAPP_VERIFY_TOKEN:
+            logger.info("WhatsApp webhook verified successfully!")
+            return challenge, 200
+        else:
+            logger.warning("WhatsApp webhook verification failed.")
+            return "Verification failed", 403
 
-    if mode == "subscribe" and token == WHATSAPP_VERIFY_TOKEN:
-        logger.info("WhatsApp webhook verified successfully!")
-        return challenge, 200
-        
-    logger.warning("WhatsApp webhook verification failed.")
-    return "Verification failed", 403
+    return "Webhook endpoint is active", 200
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
