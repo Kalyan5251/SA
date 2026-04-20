@@ -4,6 +4,7 @@ import logging
 import psycopg2
 import threading
 from flask import Flask, request, jsonify
+from twilio.twiml.messaging_response import MessagingResponse
 
 # Configure logging
 logging.basicConfig(
@@ -171,12 +172,36 @@ def verify_webhook():
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    """Endpoint to receive updates from Telegram and WhatsApp."""
+    """Endpoint to receive updates from Telegram, Meta WhatsApp, and Twilio WhatsApp."""
+
+    # --- Twilio WhatsApp detection ---
+    # Twilio sends form-encoded POST data (not JSON)
+    twilio_body = request.form.get("Body")
+    twilio_from = request.form.get("From")
+
+    if twilio_body is not None and twilio_from is not None:
+        logger.info(f"Received Twilio WhatsApp message from {twilio_from}: {twilio_body}")
+        try:
+            bot_response = process_message(twilio_from, twilio_body)
+            if bot_response:
+                threading.Thread(
+                    target=save_to_db,
+                    args=(twilio_from, twilio_body, bot_response, "Twilio-WhatsApp")
+                ).start()
+        except Exception as e:
+            logger.error(f"Error processing Twilio message from {twilio_from}: {e}", exc_info=True)
+            bot_response = "Sorry, something went wrong. Please try again."
+
+        resp = MessagingResponse()
+        resp.message(bot_response or "")
+        return str(resp), 200, {"Content-Type": "text/xml"}
+
+    # --- Meta / Telegram JSON path ---
     if not request.is_json:
         return jsonify({"status": "error", "message": "Request must be JSON"}), 400
 
     update = request.get_json()
-    
+
     if update.get("object") == "whatsapp_business_account":
         return process_whatsapp_update(update)
     else:
